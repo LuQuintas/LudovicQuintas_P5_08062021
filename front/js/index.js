@@ -33,6 +33,7 @@ fetch('http://localhost:3000/api/products')
         img.alt = product.altTxt;
         h3.innerHTML = product.name;
         p.innerHTML = product.description;
+        console.log(product);
         
         })
     });
