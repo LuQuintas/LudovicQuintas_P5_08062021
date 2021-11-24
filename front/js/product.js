@@ -1,16 +1,18 @@
-const url_id = window.location.search;
+const url_id = window.location.search; // je  récupère la barre d'adresse sur la fenêtre
+// je créé un paramaètres de recherche pour mon url
 const urlSearchParams  = new URLSearchParams(url_id);
+// je récupère l'id du produit dans l'url
 const id = urlSearchParams.get('id');
 
-
+// je fais appel à l'api avec l'id du produit 
 fetch('http://localhost:3000/api/products/'+ id)
 .then((res)=> {
     
     const response = res.json();
-    
+    // je récupère les données du produit par son id
     response.then(product =>{    
         
-        // Création du DOM 
+        // Création et définition des éléments du DOM 
 
         let addToCart = document.getElementById("addToCart");
         let colors = document.getElementById("colors");
@@ -46,24 +48,25 @@ fetch('http://localhost:3000/api/products/'+ id)
             // création du tableau pour récupérer les données
             let registerItem = []; 
 
-            // condition si le local storage à un produit
+            // condition si le local storage contient un produit
             if (localStorage.getItem("product")) {
+                // si j'ai des données, elles sont transférées dans le tableau 
                 registerItem = JSON.parse(localStorage.getItem("product")) ;
-                // localStorage.setItem("product",JSON.stringify(registerItem));
 
-                // let newRegisterItem = [...registerItem];
+                // je créé une variable qui vérifie si un produit a un id et une couleur identique dans mon tableau
                 let objIndex = registerItem.findIndex((item=> item.id === infoProduct.id && infoProduct.color === item.color));
-
+                // si cela est le cas, alors la quantité du produit est modifiée
                 if (objIndex !== -1) {
                   registerItem[objIndex].quantities += quantities;
                 }
+                // sinon si ce n'est pas le cas, j'ajoute le produit dans mon tableau 
                 else if (objIndex === -1) {
                     registerItem.push(infoProduct)
                 }
+                // j'envoi les produits de mon tableau dans le local storage et je convertis les données en chaine de caractère
                 localStorage.setItem("product",JSON.stringify(registerItem));
-                console.log(registerItem[0].quantities);
-               
             }
+            // sinon si le local storage est vide alors j'envoi les données avec un tableau et je convertis ces données en chaine de caractères
             else{
                 registerItem.push(infoProduct);
                 localStorage.setItem("product",JSON.stringify(registerItem));

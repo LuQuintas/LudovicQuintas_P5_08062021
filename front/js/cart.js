@@ -158,6 +158,8 @@ if (registerItem) {
 
 ///////////////////PARTIE FORMULAIRE
 
+// je déclrare des variables pour récupérer les id, pour créer des regex et les messages d'erreurs
+
 let firstName = document.getElementById('firstName');
 let regexName = /^[a-z ,.'-]+$/i;
 let errorFirstName = document.getElementById('firstNameErrorMsg');
@@ -179,9 +181,7 @@ let errorEmail = document.getElementById('emailErrorMsg');
 
 let order = document.getElementById('order');
 
-console.log(firstName);
-console.log(errorFirstName);
-
+// évènements en input afin d'indiquer un message d'erreur si un mauvais caractère est utilisé
 firstName.addEventListener('input',(e)=>{
     e.preventDefault();
     if (regexName.test(firstName.value)==false) {
@@ -227,9 +227,10 @@ email.addEventListener('input',(e)=>{
     }
 });
 
+// évènement au clic du bouton commender
 order.addEventListener('click',(e)=>{
     e.preventDefault();
-
+    // création d'un tableau afin de récuperer les données de l'utilisateur
     let contact = {
         firstName : firstName.value,
         lastName : lastName.value,
@@ -237,20 +238,24 @@ order.addEventListener('click',(e)=>{
         city : city.value,
         email : email.value,
     }
-
+    // si des données de l'utilisateur sont manquantes, un message d'erreur apparait
     if (firstName.value === ""|| lastName.value === ""|| address.value === "" || city.value === "" || email.value === "") {
         window.confirm("champs manquant !!")
-        window.onbeforeunload;        
+        // la page ne se réactualise pas 
+        window.onbeforeunload;
+    // sinon je créé un tableau et j'envoi les données     
     }else{
         
         let products = [];
 
+        // boucle du tableau du localStorage afin de récupérer les id et les intégrer dans mon tableau products 
         registerItem.forEach(order => {
         products.push(order.id)
         });
 
         let pageOrder = { contact , products};
-        
+
+        // je fais appel à l'api order pour envoyer mes tableaux
         fetch(('http://localhost:3000/api/products/order'),{
             method: "POST",
             headers :{'Accept':'application/json','Content-type':'application/json'
@@ -258,12 +263,10 @@ order.addEventListener('click',(e)=>{
             body : JSON.stringify(pageOrder)
         })
         .then(res =>{
-            console.log(res.orderId);
             return res.json();
         })
         .then((data)=>{
         window.location.href =`confirmation.html?orderId=${data.orderId}`;
-        console.log(data);
         })
     }
 });
