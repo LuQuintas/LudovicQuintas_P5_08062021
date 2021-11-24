@@ -3,7 +3,6 @@ fetch('http://localhost:3000/api/products')
         if(res.ok){
             return res.json();
         }
-        console.log(res);
     })
     .then(function (datas){
        datas.forEach(product => {
@@ -20,7 +19,6 @@ fetch('http://localhost:3000/api/products')
                 p.classList.add("productDescription");
             productUrl = "./product.html?id=" + product._id;
 
-    console.log(product);
         items.appendChild(a);
         a.appendChild(article);
         article.appendChild(img);
@@ -34,6 +32,5 @@ fetch('http://localhost:3000/api/products')
         h3.innerHTML = product.name;
         p.innerHTML = product.description;
         console.log(product);
-        
         })
     });
