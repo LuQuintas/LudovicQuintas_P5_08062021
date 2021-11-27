@@ -36,4 +36,7 @@ fetch('http://localhost:3000/api/products')
         p.innerHTML = product.description;
         console.log(product);
         })
-    });
+    })
+    .catch((error)=>{
+        alert(error)
+    })

@@ -137,22 +137,6 @@ if (registerItem) {
                 }
             }
         });
-
-
-        // Cette méthode fonctionne mais avec une erreur!!!
-        // for (let i = 0; i < deleteBtn.length; i++) {
-        //     deleteBtn[i].addEventListener("click",(e)=>{
-        //         e.preventDefault();
-        //         let id= eltItem.id
-        //         // let deleteProduct = registerItem.findIndex((item=> item.id ===eltItem.id));
-        //         registerItem = registerItem.filter((el => el.id !== id));
-        //         cartArticles.removeChild(article);
-        //             // registerItem.splice(index, 1);
-        //         totalQuantity();
-        //          totalPrice();
-        //         localStorage.setItem("product",JSON.stringify(registerItem))
-        //     })
-        // }
     });
 }
 
@@ -267,6 +251,9 @@ order.addEventListener('click',(e)=>{
         })
         .then((data)=>{
         window.location.href =`confirmation.html?orderId=${data.orderId}`;
+        })
+        .catch((error)=>{
+            alert(error);
         })
     }
 });
