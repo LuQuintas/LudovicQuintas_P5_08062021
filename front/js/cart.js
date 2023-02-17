@@ -19,7 +19,6 @@ function totalPrice(params) {
     total = 0;
     priceItem.forEach(price => {
         total += Number(price.textContent);
-        console.log(typeof price.textContent);
     })
     return totalPrice.innerHTML = total;
 }
@@ -60,7 +59,7 @@ if (registerItem) {
             nameItem.innerHTML = eltItem.name;
         let priceItem = document.createElement("p");
             priceItem.classList.add("priceItem");
-            // +" "+"€";
+            
             contenTitlePrice.appendChild(nameItem);
             contenTitlePrice.appendChild(priceItem);
             
@@ -94,14 +93,14 @@ if (registerItem) {
             settingsDelete.appendChild(deleteItem);
             
         // A l'ouverture du panier, calcul des tarifs et des quantités déjà présents
-        priceItem.innerHTML=inputQuantity.value * eltItem.price;
+        priceItem.innerHTML=inputQuantity.value * eltItem.price +" "+"€";
         totalPrice()
         totalQuantity()
             
         // changement des quantités avec la maj des tarifs, des quantités et du local storage
         inputQuantity.addEventListener("change",(e)=>{
             e.preventDefault();
-            priceItem.innerHTML=inputQuantity.value * eltItem.price;
+            priceItem.innerHTML=inputQuantity.value * eltItem.price +" "+"€";
             totalQuantity();
             totalPrice();
             if (localStorage.getItem('product')) {

@@ -1,5 +1,5 @@
 const url_id = window.location.search; // je  récupère la barre d'adresse sur la fenêtre
-// je créé un paramaètres de recherche pour mon url
+// je créé un paramètres de recherche pour mon url
 const urlSearchParams  = new URLSearchParams(url_id);
 // je récupère l'id du produit dans l'url
 const id = urlSearchParams.get('id');
