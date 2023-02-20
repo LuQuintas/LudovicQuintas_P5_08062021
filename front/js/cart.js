@@ -16,9 +16,9 @@ function totalQuantity(params) {
 function totalPrice() {
   let totalPrice = document.getElementById("totalPrice");
   let priceItem = document.querySelectorAll(".priceItem");
-  total = "";
+  total = 0;
   priceItem.forEach((price) => {
-    total += price.textContent;
+    total += parseInt(price.innerHTML);
   });
   return (totalPrice.innerHTML = total);
 }
